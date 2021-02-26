@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author Victor Wanderley
  */
-public class Cliente implements ComprasCliente{
+public class Cliente implements ComprasCliente, Comparable<Cliente>{
     private String nome;
     List<Double> compras = new ArrayList();
 
@@ -51,4 +51,16 @@ public class Cliente implements ComprasCliente{
         valorTotal = this.getCompras().stream().map(valor -> valor).reduce(valorTotal,(valor, acumulador) -> acumulador+valor);
         return valorTotal;
     }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "nome=" + nome + "}\n";
+    }
+
+//    Ordenará as instâncias de Cliente por ordem alfabética.
+    @Override
+    public int compareTo(Cliente o) {
+        return this.getNome().compareTo(o.getNome());
+    }
+    
 }
