@@ -54,7 +54,10 @@ public class Cliente implements ComprasCliente, Comparable<Cliente>{
 
     @Override
     public String toString() {
-        return "Cliente{" + "nome=" + nome + "}\n";
+        return "Cliente: "+nome
+                +"Quantidade de Compras: "+this.getCompras().size()
+                +"Valor Total Comprado: R$ "+String.format("%.2f", this.totalCompras())
+                +"\n";
     }
 
 //    Ordenará as instâncias de Cliente por ordem alfabética.
