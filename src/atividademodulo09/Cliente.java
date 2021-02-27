@@ -55,8 +55,8 @@ public class Cliente implements ComprasCliente, Comparable<Cliente>{
     @Override
     public String toString() {
         return "Cliente: "+nome
-                +"Quantidade de Compras: "+this.getCompras().size()
-                +"Valor Total Comprado: R$ "+String.format("%.2f", this.totalCompras())
+                +"\nQuantidade de Compras: "+this.getCompras().size()
+                +"\nValor Total Comprado: R$ "+String.format("%.2f", this.totalCompras())
                 +"\n";
     }
 
