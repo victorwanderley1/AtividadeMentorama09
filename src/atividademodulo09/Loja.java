@@ -38,6 +38,10 @@ public class Loja{
     public Cliente clienteComMenorCompra(){
         return this.listaDeClientes.stream().min(new OrdemValorCompras()).get();
     }
-    
-    
+    public String imprimirClientes(){
+        return this.getListaDeClientes().toString()
+                .replace(", ", "")
+                .replace("[", "")
+                .replace("]","");
+    }
 }
