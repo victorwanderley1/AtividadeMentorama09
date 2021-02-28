@@ -25,7 +25,8 @@ public class Menu {
             escolhaMenu(escolha);
         }
     }
-    public void menuRelatorio(){
+    
+    private void menuRelatorio(){
         System.out.println("--- Relatórios de Compras ---"
                 + "\n Escolha qual relatório deseja visualizar:"
                 + "\n 1) Clientes Por Ordem Alfabética"
@@ -52,25 +53,25 @@ public class Menu {
         }
     }
     
-    public void relatorioClienteOrdemAlfabetica(){
+    private void relatorioClienteOrdemAlfabetica(){
         System.out.println("Lista de cliente por ordem alfabética:"
                 + "\n"+loja.imprimirClientes()
                 + "\n");
     }
     
-    public void relatorioClienteOrdemValorCompras(){
+    private void relatorioClienteOrdemValorCompras(){
         System.out.println("Lista de cliente por ordem de valor de compras:"
                 + "\n"+loja.imprimirClientesValorCompras()
                 + "\n");
     }
     
-    public void relatorioClienteOrdemQtdCompras(){
+    private void relatorioClienteOrdemQtdCompras(){
         System.out.println("Lista de cliente por ordem de quantidade de compras:"
                 + "\n"+loja.imprimirClientesQtdCompras()
                 + "\n");
     }
     
-    public void relatorioGeralLoja(){
+    private void relatorioGeralLoja(){
         List<Cliente> clientes = List.copyOf(loja.getListaDeClientes());
         int qtdCompras = 0;
         qtdCompras = clientes.stream()
@@ -103,7 +104,7 @@ public class Menu {
     
     
     
-    public void escolhaMenu(int escolha){
+    private void escolhaMenu(int escolha){
         switch (escolha){
             case 1:
                 menuAddCliente();
@@ -113,9 +114,6 @@ public class Menu {
                 break;
             case 3:
                 menuRelatorio();
-                break;
-            case 4://tirar função
-                System.out.println(loja.getListaDeClientes().toString().replace(", ", "").replace("[","").replace("]", ""));
                 break;
             default:
                 System.out.println("Opção Inválida! Tente Novamente.");
@@ -130,7 +128,7 @@ public class Menu {
         if(!loja.getListaDeClientes().stream().map(cliente -> cliente.getNome()).anyMatch(nome -> nome.equals(nomeCliente))){
             loja.adicionarCliente(nomeCliente);
             System.out.println("Cliente adicionado com sucesso!");
-        }else System.out.println("Cliente já existente!");
+        }else System.out.println("Cliente já cadastrado!");
     }
 
     private void menuRealizarCompra() {
@@ -143,8 +141,9 @@ public class Menu {
                 System.out.println("Qual o Valor da Compra: ");
                 double valorCompra = entradaTeclado.nextDouble();
                 loja.getListaDeClientes().get(i).fazerCompra(valorCompra);
+                System.out.println("Compra Realizada!\n");
                 break;
-            }
+            }else System.out.println("Cliente não cadastrado!");
         }
     }
 }

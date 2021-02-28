@@ -19,17 +19,10 @@ public class Cliente implements ComprasCliente, Comparable<Cliente>{
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public List<Double> getCompras() {
         return compras;
     }
 
-    public void setCompras(List<Double> compras) {
-        this.compras = compras;
-    }
     
     /**
      * Função recebe valor da compra e efetua a compra adicionando na
