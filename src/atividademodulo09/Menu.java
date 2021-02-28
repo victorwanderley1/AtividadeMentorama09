@@ -65,6 +65,17 @@ public class Menu {
     }
 
     private void menuRealizarCompra() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Qual cliente fará a compra: ");
+        System.out.println(loja.imprimirNomeClientes());
+        entradaTeclado.nextLine();
+        String escolhaNomeCliente = entradaTeclado.nextLine();
+        for (int i = 0; i<loja.getListaDeClientes().size(); i++){
+            if(loja.getListaDeClientes().get(i).getNome().equalsIgnoreCase(escolhaNomeCliente)){
+                System.out.println("Qual o Valor da Compra: ");
+                double valorCompra = entradaTeclado.nextDouble();
+                loja.getListaDeClientes().get(i).fazerCompra(valorCompra);
+                break;
+            }
+        }
     }
 }
