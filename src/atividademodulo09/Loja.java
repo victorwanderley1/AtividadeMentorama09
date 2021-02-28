@@ -44,4 +44,9 @@ public class Loja{
                 .replace("[", "")
                 .replace("]","");
     }
+    public String imprimirNomeClientes(){
+        String nomes = "";
+        nomes = this.listaDeClientes.stream().map(cliente -> cliente.getNome()).reduce(nomes, (acumulador, item) -> acumulador.concat("\n"+item));
+        return nomes;
+    }
 }
