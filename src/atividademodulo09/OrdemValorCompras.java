@@ -10,9 +10,9 @@ public class OrdemValorCompras implements Comparator<Cliente>{
 
     @Override
     public int compare(Cliente o1, Cliente o2) {
-        if(o1.totalCompras() > o2.totalCompras()){
+        if(o2.totalCompras() > o1.totalCompras()){
             return -1;
-        }else if (o1.totalCompras() == o2.totalCompras()){
+        }else if (o2.totalCompras() == o1.totalCompras()){
             return 0;
         }else{
             return 1;
