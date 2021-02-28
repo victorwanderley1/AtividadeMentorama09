@@ -7,7 +7,7 @@ import java.util.Scanner;
  *
  * @author Victor Wanderley
  */
-public class Menu {
+public class Menu implements GeradorCompras{
     /**
      * Menu principal
      * Menu Relatório

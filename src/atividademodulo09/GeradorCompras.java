@@ -8,13 +8,21 @@ package atividademodulo09;
 import java.util.List;
 
 /**
- *
+ *  A Interface é um randomizador de compras para melhoras a visualização da atividade.
  * @author Victor Wanderley
  */
-public class GeradorCompras {
-    public void gerar(List<Cliente> listaDeClientes, int repeticoes){
+public interface GeradorCompras {
+
+    /**
+     * O método faz uma randomização de compras de uma lista de Clientes de acordo
+     *com a quantidade de repetições e o valor máximo passado como parâmetros.
+     * @param listaDeClientes
+     * @param repeticoes
+     * @param valorMaximo
+     */
+    default void randomCompras(List<Cliente> listaDeClientes, int repeticoes, double valorMaximo){
         for(int i = 0; i < repeticoes; i++){
-            listaDeClientes.forEach(cliente -> cliente.fazerCompra(Math.random()*10000));
+            listaDeClientes.forEach(cliente -> cliente.fazerCompra(Math.random()*valorMaximo));
         }
     }
 }
