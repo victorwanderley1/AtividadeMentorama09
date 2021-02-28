@@ -20,13 +20,13 @@ public class Loja{
     }
     
     public void adicionarCliente(String nomeCliente){
-        this.listaDeClientes.add(new Cliente(nomeCliente));
+        this.listaDeClientes.add(new Cliente(nomeCliente.toUpperCase()));
         Collections.sort(this.listaDeClientes);
     }
     
     public void adicionarCliente(String[] nome){
         for(String nomeCliente: nome){
-            this.listaDeClientes.add(new Cliente(nomeCliente));
+            this.listaDeClientes.add(new Cliente(nomeCliente.toUpperCase()));
         }
         Collections.sort(this.listaDeClientes);
     }
@@ -44,6 +44,27 @@ public class Loja{
                 .replace("[", "")
                 .replace("]","");
     }
+    
+    public String imprimirClientesValorCompras(){
+        List<Cliente> clientes = new ArrayList();
+        clientes.addAll(this.getListaDeClientes());
+        clientes.sort(new OrdemValorCompras());
+        return clientes.toString()
+                .replace(", ", "")
+                .replace("[", "")
+                .replace("]","");
+    }
+    
+    public String imprimirClientesQtdCompras(){
+        List<Cliente> clientes = new ArrayList();
+        clientes.addAll(this.getListaDeClientes());
+        clientes.sort(new QtdComprasCliente());
+        return clientes.toString()
+                .replace(", ", "")
+                .replace("[", "")
+                .replace("]","");
+    }
+    
     public String imprimirNomeClientes(){
         String nomes = "";
         nomes = this.listaDeClientes.stream().map(cliente -> cliente.getNome()).reduce(nomes, (acumulador, item) -> acumulador.concat("\n"+item));

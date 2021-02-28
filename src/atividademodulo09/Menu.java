@@ -1,5 +1,6 @@
 package atividademodulo09;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -32,8 +33,76 @@ public class Menu {
                 + "\n 3) Clientes Por Quantidade de Compras"
                 + "\n 4) Relatório Geral");
         int escolha = entradaTeclado.nextInt();
-        
+        switch (escolha){
+            case 1:
+                relatorioClienteOrdemAlfabetica();
+                break;
+            case 2:
+                relatorioClienteOrdemValorCompras();
+                break;
+            case 3:
+                relatorioClienteOrdemQtdCompras();
+                break;
+            case 4:
+                relatorioGeralLoja();
+                break;
+            default:
+                System.out.println("Opção inválida!\nTente Novamente!\n");
+                break;
+        }
     }
+    
+    public void relatorioClienteOrdemAlfabetica(){
+        System.out.println("Lista de cliente por ordem alfabética:"
+                + "\n"+loja.imprimirClientes()
+                + "\n");
+    }
+    
+    public void relatorioClienteOrdemValorCompras(){
+        System.out.println("Lista de cliente por ordem de valor de compras:"
+                + "\n"+loja.imprimirClientesValorCompras()
+                + "\n");
+    }
+    
+    public void relatorioClienteOrdemQtdCompras(){
+        System.out.println("Lista de cliente por ordem de quantidade de compras:"
+                + "\n"+loja.imprimirClientesQtdCompras()
+                + "\n");
+    }
+    
+    public void relatorioGeralLoja(){
+        List<Cliente> clientes = List.copyOf(loja.getListaDeClientes());
+        int qtdCompras = 0;
+        qtdCompras = clientes.stream()
+                .map(cliente -> cliente.getCompras().size())
+                .reduce(qtdCompras, (acumulador, item) -> acumulador+item);
+        
+        double valorTotalDeCompras = 0;
+        valorTotalDeCompras = clientes.stream()
+                .map(cliente -> cliente.totalCompras())
+                .reduce(valorTotalDeCompras, (acumulador, item) -> acumulador+item);
+        
+        double mediaCompras = valorTotalDeCompras/qtdCompras;
+        
+        Cliente clienteMaiorValorCompras = clientes.stream().max(new OrdemValorCompras()).get();
+        Cliente clienteMenorValorCompras = clientes.stream().min(new OrdemValorCompras()).get();
+        System.out.println("\n-------------Relatório geral-------------\n"
+                + "Quantidade de compras dos clientes:      "+qtdCompras+"\n"
+                + "Valor total de compras:               R$ "+String.format("%.2f", valorTotalDeCompras)+"\n"
+                + "Média de compras dos clientes:        R$ "+String.format("%.2f",mediaCompras)+"\n"
+                + "\n\n"
+                + "O cliente que mais comprou: "+clienteMaiorValorCompras.getNome()+"\n"
+                + "Com o total de "+clienteMaiorValorCompras.getCompras().size()+" compras.\n"
+                + "E o valor total de R$ "+String.format("%.2f", clienteMaiorValorCompras.totalCompras())+"\n"
+                + "\n"
+                + "O cliente que menos comprou: "+clienteMenorValorCompras.getNome()+"\n"
+                + "Com o total de "+clienteMenorValorCompras.getCompras().size()+" compras.\n"
+                + "E o valor total de R$ "+String.format("%.2f", clienteMenorValorCompras.totalCompras())+"\n"
+                + "\n");
+    }
+    
+    
+    
     public void escolhaMenu(int escolha){
         switch (escolha){
             case 1:
@@ -45,7 +114,7 @@ public class Menu {
             case 3:
                 menuRelatorio();
                 break;
-            case 4:
+            case 4://tirar função
                 System.out.println(loja.getListaDeClientes().toString().replace(", ", "").replace("[","").replace("]", ""));
                 break;
             default:
